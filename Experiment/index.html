@@ -1,0 +1,710 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>SAL Pilot</title>
+        
+    <!-- Load in jsPsych and jQuery -->
+        
+    <script src='extras/jquery-3.4.1.js'></script>
+    <script   src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        
+    <script src='jspsych-6/jspsych.js'></script>
+    <link href='jspsych-6/css/jspsych.css' rel='stylesheet' type='text/css'></link>
+    
+    <!-- Extra utilities (CoCo Lab) -->
+    
+    <script src = 'extras/underscore.js'></script>
+    <script src = 'extras/mmturkey.js'></script>
+    <script src = 'extras/browser.detect.js'></script>
+    <script src = 'extras/jquery.csv.js'></script>
+    
+    <!-- jsPsych Plugins go HERE -->
+    <script src = 'scripts/user-plugins/consent_plugin.js'></script>
+    <script src = 'scripts/user-plugins/person_intro_plugin.js'></script>
+    <script src = 'scripts/user-plugins/text_display_plugin.js'></script>
+    <script src = 'scripts/user-plugins/text_display_image_plugin.js'></script>
+    <script src = 'scripts/user-plugins/end_instruct_plugin.js'></script>
+    <script src = 'scripts/user-plugins/trial_plugin.js'></script>
+    <script src = 'scripts/user-plugins/slider_plugin.js'></script>
+    <script src = 'scripts/user-plugins/question_plugin.js'></script>
+    <script src = 'scripts/user-plugins/block_questions_plugin.js'></script>
+    <script src = 'scripts/user-plugins/post_task_plugin.js'></script>
+    <script src = 'scripts/user-plugins/pt_general_plugin.js'></script>
+    <script src = 'scripts/user-plugins/comments_plugin.js'></script>
+    <script src = 'scripts/user-plugins/end_plugin.js'></script>
+    
+    <!-- Other experiment specific scripts -->
+    <script src = 'scripts/exp-timeline.js'></script>
+    <script src = 'scripts/trajectory_creator.js'></script>
+    <script src = 'scripts/image_loader.js'></script>
+    <script src = 'scripts/name_loader.js'></script>
+    <script src = 'scripts/utils.js'></script>
+    <link href='styles/experiment-style.css' rel='stylesheet' type='text/css'></link>
+
+          
+</head>
+
+<body>
+    
+    <!-- jspsych-target should be empty! Your experiment nodes will add content to this div. -->  
+    <div id = "jspsych-target">
+        
+    </div>
+    
+    <!-- Templates for each page of the study. Gets hidden by the exp-timeline. -->
+    
+    <div id = "templates">
+    
+    <!-- Introduction and Consent form -->
+    <div id = 'Introduction'>
+        <div id = 'Intro_ID'>
+        
+        <img src = "logo/DU_Logo.png" width = 275px height = 150px;>   
+            
+        <h1><b>University of Denver - Sokol-Hessner Lab <br> Consent Form for Participation in Research </b></h1>
+
+        <p><b>Title of Research Study:</b> Behavioral &#38; physiological correlates of affect and decision making</p>
+
+        <p><b>Researcher(s):</b> Dr. Peter Sokol-Hessner, University of Denver, Denver, CO 80208 (303-871-3837, Peter.Sokol-Hessner@du.edu)</p>
+
+        <p><b>Study Site:</b> Online Study conducted by the University of Denver</p>
+
+        <p><b><u>Purpose</u></b> <br> You are invited to participate in a research study that examines behavior in the context of decision-making.</p>
+
+        <p><b><u>Procedures</u></b><br> Today’s study is expected to take no more than 1 hour of your time.  </p>
+        
+        <p><b>Task: Basic Behavior</b><br>You will be asked to do the following:<br><br>
+            1)  View and/or respond to visual stimuli on a computer screen (may include words or images that invoke positive or negative emotions, such as the word “fear” or an image of someone crying)</p>
+        
+        <p><b>Task: Questionnaires &#38; Scales</b><br>
+            You will be asked to complete some questionnaires related to the study. Questions may pertain to emotions, social attitudes, substance use, suicide, stress, and/or your experience in this study.</p>
+        
+        <p>You will be asked to complete some questionnaires related to the study. We will also ask you to provide some general demographic information about yourself. This information may include your age, gender, race, education, etc.</p>
+
+        <p><b><u>Voluntary Participation</u></b><br>
+            Participating in this research study is completely voluntary. Even if you initially decide to participate, you may change your mind and stop participation at any time. You may choose not to complete any survey question, and you may withdraw from the study at any time, including before, during, or after any tasks, for any reason and without explanation, and you will still be compensated at the specified hourly rate. </p>
+        
+        <p><b><u>Risks or Discomforts</u></b><br>
+            Potential risks and/or discomforts of participation are generally minimal (meaning no more than you might experience in an average day), and may include:</p>
+        
+        <p><b>Tasks (incl. basic behavioral, risky decision-making, signal detection, and emotion regulation)</b><br>
+            -	Mild boredom, fatigue, or frustration during a cognitive task<br>
+            -	Embarrassment, distress, or discomfort when viewing emotional stimuli (e.g. images). As a reminder, your participation is voluntary and may be discontinued at any time. </p>
+        <p><b>Task: Questionnaires and tasks regarding social groups</b><br>
+            -	You may experience discomfort and/or distress when responding to or answering questions about other people or social groups. As a reminder, your participation is voluntary and may be discontinued at any time.</p>
+        
+        <p>Some people find answering questions about their life events distressing or embarrassing. If you become uncomfortable, and remain upset after 48 hours as a result of completing any part of the experiment, such as questionnaires that may cover some sensitive topics including your mental health, you should take one of the following actions: (1) arrange a timely appointment with your physician, clinical psychologist or psychiatrist; or if you are having suicidal thoughts (2) call 911 or visit a hospital emergency room or urgent care center, or (3) please contact the National Suicide Prevention Lifeline (<i>1-800-273-8255</i>).</p>
+        
+        <p>There is also a slight risk of unintended breach of confidentiality. Please see confidentiality section below for more details.</p>
+        
+        <p><b><u>Benefits</u></b><br>
+            Possible benefits of participation include contributing to current scientific knowledge about how people feel, respond, and make decisions under certain conditions. This study is not designed to treat any illness or provide any positive health benefits for those who participate.</p>
+        
+        <p><b><u>Incentives to Participate</u></b><br>
+            You will receive compensation for the time you spend participating in this research project.</p>
+
+        <p>You will be compensated 2 CHITs for this study (calculated at the rate of 2 CHITs/hr for the 1 hour this study is expected to take). You may withdraw from this study at any time. If you withdraw before the study is finished, you will still be compensated as stated above. </p>
+        
+        <p><b><u>Confidentiality</u></b><br>
+            All information collected in this study will be kept strictly confidential, except as may be required by law. Confidentiality is strictly maintained; data collected during this study is coded and stored by number, not by name, in order to maintain your confidentiality. If any publication results from this research, you will not be identified by name. You will be assigned a number and your name will not appear on any test forms or other records. All questionnaires and test forms will be kept in locked room or on a secured computer. All records (stored by participant number) will be kept indefinitely.</p>
+        
+        <p>There are some potential exceptions to confidentiality. Records that identify you (including your medical records) and the consent form signed by you, may be looked at by the following people:<br>
+            •    Federal agencies that oversee human subject research<br>
+            •	The investigator and research team for this study<br>
+            •	Regulatory officials from the institution where the research is being conducted, to ensure compliance with policies or monitor the safety of the study<br>
+            •	University of Denver Institutional Review Board</p>
+            
+        <p>Additionally, should any information contained in this study be the subject of a court order or lawful subpoena, the University of Denver might not be able to avoid compliance with the order or subpoena. Although no questions in this study address it, we are required by law to tell you that if information is revealed concerning suicide, homicide, or child abuse and neglect, it is required by law that this be reported to the proper authorities.</p>
+            
+        <p><b>[For studies involving Mechanical Turk Workers and Qualtrics:</b> Before you begin, please note that the data you provide may be collected and used by [Mechancial Turk/Qualtrics] as per its privacy agreement. This research is only for U.S. residents over the age of 18 (or 19 in Nebraska). Please be mindful to respond in private and through a secured Internet connection for your privacy. Your confidentiality will be maintained to the degree permitted by the technology used. Specifically, no guarantees can be made regarding the interception of data sent via the Internet by any third parties.<b>]</b></p>
+            
+        <p><b><u>Questions</u></b><br>
+            If you have any questions about this project or your participation, please feel free to ask questions now or contact Dr. Peter Sokol-Hessner at Peter.Sokol-Hessner@du.edu at any time.</p>
+            
+        <p>If you have any questions or concerns about your research participation or rights as a participant, you may contact the DU Human Research Protections Program by emailing <u>IRBAdmin@du.edu</u> or calling (303) 871-2121 to speak to someone other than the researchers.</p>
+            
+        <p><b><u>Options for Participation:</u></b></p>
+          
+        <input class = 'radio_css' id = 'may_contact' type = 'radio' name = 'recontact' value = 'Yes'><label for = 'may_contact'>The researchers may contact me again to participate in future research activities.</label><br>
+        <input class = 'radio_css' id = 'may_not' type = 'radio' name = 'recontact' value = 'No'> <label for = 'may_not'>The researchers may NOT contact me again to participate in future research activities.</label> <br><br>
+            
+        <p><b>Please take all the time you need to read through this document and decide whether you would like to participate in this research study.</b></p>
+            
+        <p>If you decide to participate, your completion of the research procedures indicates your consent.  Please keep this form for your records. To participate, click the button on the bottom of the screen to continue.</p>
+
+        <div id = 'angry_box'>
+        </div> <br>   
+            
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+    </div>
+        
+    </div>
+
+        
+    <!-- Task Instructions -->    
+        
+    <div id = 'Instructions'>
+        <div id = 'Instruct_ID'>
+            
+        <!-- This needs to include way more information and also be split up into multiple pages -->
+        
+        <h1>Instructions</h1>
+            
+            <p>For this task, you'll be learning about multiple people by reading through a series of two-sentence stories, or "vignettes," and answering questions about your feelings toward them. </p>
+            
+            <p>Vignettes will be presented <b>one sentence at a time</b>, for 4 seconds each. You will read the first sentence, then the second sentence, and then answer two questions, one at a time, which will ask you about your feelings about the person, taking into consideration what you have just learned about them. <b>For each of these two questions, you will have 10 seconds to make your response.</b> If you do not respond within the allotted amount of time, the task will move forward and your answer will not be recorded. </p>
+
+            
+            <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+        </div>
+    </div>
+        
+    <div id = 'Instructions_2'>
+        
+        <h1>Instructions</h1>
+                        
+        <p>You will always answer the same two questions after every vignette. First, you will answer how <b>likable</b> you find this person to be. Likable refers to how appealing you find this person, or how positively you perceive him to be.</p>    
+
+        <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+    <div id = 'Instructions_3'>
+        
+        <h1>Instructions</h1>
+        
+        <p>For the second question, you will be asked how much you'd <b>like to connect</b> with the person. Connect here refers to how much you'd like to spend time with this person, get to know them better, or otherwise interact with them. </p>
+        
+        <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+    <div id = 'Instructions_4'>
+        
+        <h1>Instructions</h1>
+        
+        <p>For both of these questions, you’ll input your answer using <b>a scale displayed directly underneath</b> the question. You will have one opportunity to answer the question - you can click the spot you’d like on the scale to input your response, or you can click, hold, and drag the marker to your desired location. </p>
+        
+        <p>Regardless of how you choose to answer, please note that <b>once you let go of your mouse click, your answer will be recorded and the task will move on.</b> More detailed information about each scale will be displayed on screen underneath each scale. </p>
+        
+        <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+
+    </div>
+        
+    <div id = 'Instructions_5'>
+        
+        <h1>Instructions</h1>
+        
+        <p>To help you get to know each person better, each vignette will be paired with an image of the person's face. An example of a face that you may see is below.</p>
+        
+        <img id = 'example_face' src = {0} alt = 'example_image' height = '300' width = '400'/><br>
+        
+        <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+           
+    </div>
+        
+    <div id = 'Instructions_6'>
+        
+        <h1>Instructions</h1>
+        
+        <p>For each person, it is important that you treat each thing you learn as <b>adding to your conception of this person.</b> Each vignette is intended to give you more information about that one person, and each item you learn should help you build a deeper understanding of the person you are learning about.</p>
+        
+        <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>    
+        
+    <div id = 'Instructions_7'>
+        
+        <h1>Instructions</h1>
+        
+        <p>Over the course of this task, <b>you will learn about 12 different people, one at a time.</b> For each person, you will learn <b>10 things</b> about them. After you've learned all 10 things about a person, you will be asked some more questions about your feelings toward them before moving on to the next person. After you have learned about all 12 people, you'll be asked to complete a series of questionnaires about yourself and about each person you learned about during the task. These questionnaires are all <b>untimed</b>. Please keep in mind that <b>you will need to answer all questions before moving on to the next part of the task.</b></p> <br>
+        
+        <p><i>When you have read through and understand this page, please press the button below to continue on to the next page of instructions.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+    
+    </div>
+        
+    <div id = 'Instructions_End'>
+        
+        <h1>Instructions</h1>
+        
+        <p>This is the end of the instructions. If you have read through and feel that you have understood all the instructions, please press the button labeled <b>"Continue"</b> to move on to the practice. Otherwise, if you are uncertain about any of the instructions, please press the button labeled <b>"Repeat Instructions"</b> to view the instructions from the beginning. You will have the chance to repeat the instructions <b>one time.</b></p>
+        
+        <button id = 'continue' type = 'button'><b>Continue</b></button>
+        <button id = 'repeat' type = 'button'><b>Repeat Instructions</b></button>
+        
+    </div>
+        
+    <div id = 'instruct_end_redux'>
+        
+        <p>This is the end of the instructions. When you are ready, please press the button below to continue on to the practice.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+    <div id = 'Practice_Intro'>
+        
+        <h1>Practice Instructions</h1>
+        
+        <p>Prior to starting the main task, you will have 2 practice trials. These trials will look identical to the real trials, however they are unrelated to the main task or any of the people you will learn about later. They are simply intended to give you a feel for the structure of the main task. </p><br>
+        
+        <p><i>When you're ready to begin the task, please press the button below to continue on to the practice.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+    <!-- Practice trials use 'Person_Intro' and 'Trial' div! -->
+        
+    <div id = 'End_Practice'>
+        <h1>Practice</h1>
+        
+        <p>This concludes the practice trials. When you're ready to being the main task, please press the continue button below.</p> <br>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+    
+    </div>
+        
+    <!-- Pre-Block Person Introduction -->
+    
+    <div id = 'Person_Intro'>
+        
+        <h1>Person Introduction</h1>
+        
+        <p>You are now going to learn about {0}. To help you get a sense for the person you are learning about, a picture of {0} is displayed below. {0}'s picture will be displayed alongside each of the things you learn about them. </p>
+        
+        <div id = 'person_face'>
+            <img id = 'intro_face' src = {1} alt = 'Person_Image'/>
+        </div>
+        
+        <p>When you're ready to begin learning about {0}, please press the button below.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+    
+        
+    <!-- Grab baseline impressions of the person first? Maybe they're based on the name, face, etc? Ask some questions like, off the bat how appealing is this dude? -->
+        
+    <!-- Stimuli presentation (Trial -->
+        
+    <div id = 'Trial'>
+        
+        <div id = 'face_box'>
+            <img id = 'face' src = {0} alt = 'Trial Image'/>
+        </div>
+        
+        <div id = 'action'>
+        
+        </div>
+        
+        <div id = 'fixation'>
+            <p id = 'fix_cross'>+</p>
+        </div>
+        
+        <div id = 'situation'>
+        
+        </div>
+
+        <!-- Liking and Connection Questions (per trial) --->
+        
+        <div id = Liking_Question>
+            
+                 <h1 id = 'likable_q'>How likable is this person?</h1>
+
+            
+            <div class = 'button_scale'>
+                
+                    <input type = 'range' min = '1' max = '100' value = 50 class = 'slider' id = 'liking_slider'>
+      
+                <div id= "scale_label">
+                    <pre>Not at all likable                                   Very likable</pre>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        <div id = Connect_Question>
+            
+                 <h1 id = 'connect_q'>How much would you like to connect with this person?</h1>
+
+            
+            <div class = 'button_scale'>
+                
+                
+                <input type = 'range' min = '1' max = '100' value = '50' class = 'slider' id = 'liking_slider'>
+      
+                <div id= "scale_label">
+                    <pre>Not at all                                   Very Much</pre>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+        
+    <!-- Post-block questions (displayed for each character) -->
+        
+    <div id = 'post_block_intro'>
+        
+        <p>Now that you have learned all our information about {0}, you will next be asked to answer several questions about your feelings toward {0}.</p>
+        
+        <p>When you're ready, please press the continue button below to move on to the questions about {0}.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+    <div id = 'block_questions'>
+        
+        <h1>Questions about {0}</h1>
+        
+        <p><b>Please answer the questions below regarding your feelings towards {0}, the person you learned about during this block. All questions will need to be answered before you can move on to the next task.</b></p>
+        
+        <form id = 'post_block_questions'>
+            
+            How close would you ideally like to be with {0}?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Int_1' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not close at all                                   Very close</pre>
+            </div>        
+        
+            How platonically or romantically interested in {0} are you?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Int_2' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Completely platonic                                   Completely romantic</pre>
+            </div>
+        
+            How interested would you be in getting to know {0} better?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Int_3' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all interested                                    Very interested</pre>
+            </div>
+        
+            Where would you want to see yourself in relation to {0}?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Pow_1' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Less powerful                                     More powerful</pre>
+            </div>        
+        
+            How much influence would you like {0} to have on you?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Pow_2' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Very little                                    Very much</pre>
+            </div> 
+        
+            How much influence would you like to have on {0}?<br>
+                <input type = "range" min = '1' max = '100' value = '50' name = 'Pow_3' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Very little                                    Very much</pre>
+            </div> 
+        
+            How much do you think you would benefit from having some form of a relationship with {0}?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Val_1' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                    Very much</pre>
+            </div>        
+        
+            How personally valuable do you think having a relationship with {0} would be?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Val_2' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all valuable                                   Very valuable</pre>
+            </div>
+        
+            How professionally valuable do you think having a relationship with {0} would be?<br>
+        
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Val_3' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all valuable                                    Very valuable</pre>
+            </div>
+            
+            <div id = 'angry_box'></div> <br>
+        
+            <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+        </form>
+        
+    </div>
+        
+<!-- Post-task questionnaires go here -->
+        
+    <div id = 'post_task_intro'>
+        
+        <p>You have now learned about all 12 people. For this next part of the task, you'll be asked to answer some general questions about your thoughts and feelings toward each person you learned about, one at a time. Prior to each set of questions, a picture of the person will be shown on screen to remind you of who you're answering questions about. </p>
+        
+        <p>When you're ready, please press the continue button below.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+    </div>
+        
+    <div id = 'pt_person_intro'>
+        
+        <p>You will now now be asked to answer some questions about your thoughts and feelings toward {0}, whom you learned about earlier in the task. A picture of {0} is displayed below: </p>
+        
+        <div id = 'pt_person_face'>
+            <img id = 'posttask_face' src = {1} alt = 'Person_Image'/>
+        </div>
+        
+        <p>When you're ready to begin, please press the button below to continue.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+    <div id = 'post_task_questions'>
+        
+        <p><b>Please answer the questions below regarding your feelings towards {0}. All questions will need to be answered before you can move on to the next task.</b></p><br>
+        
+        <form id = 'post_task'>
+            
+            How much do you remember the things you learned about {0}? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'memory' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                  Very much</pre>
+            </div>
+            
+            How confidently do you feel you remember the things you learned about {0}? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'memoryConfidence' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all confident                                  Very confident</pre>
+            </div>
+            
+            How much would you like to be friends with {0}?<br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'friendDesire' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                   Very much</pre>
+            </div>
+            
+            How similar do you think {0} is to you?<br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'similarity' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                   Very much</pre>
+            </div>
+            
+            How much would you like to be on a team with {0}?<br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'teamDesire' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                   Very much</pre>
+            </div>
+            
+            How much would you want to be working on a project with {0} in your group?<br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'projectDesire' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                   Very much</pre>
+            </div>
+            
+            Who would you rather be friends with?<br>
+            <div id = 'friend_radio'>
+                <input class = 'radio_css' id = 'character' type = 'radio' name = 'friend_choice' value = {0}><label for = 'character'>{0}</label><br>
+                <input class = 'radio_css' id = 'other' type = 'radio' name = 'friend_choice' value = 'Other'> <label for = 'other'>A random other person</label> <br><br>
+            </div>
+            
+            Would you want to join a team with {0} on it?<br>
+            <div id = 'team_radio'>
+                <input class = 'radio_css' id = 'team_yes' type = 'radio' name = 'join_team' value = 'yes'><label for = 'team_yes'>Yes</label><br>
+                <input class = 'radio_css' id = 'team_no' type = 'radio' name = 'join_team' value = 'no'> <label for = 'team_no'>No</label> <br><br>
+            </div>
+            
+            Let’s say {0} wants to meet up with you and invites you out to a new restaurant. How expensive would the food have to be before you would be unwilling to accept their invitation? Please use the slider below to select a dollar amount between 1 and 100. <br>
+            
+            <div id = 'dollar_display'>
+            
+            </div>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'restaurantCost' class = 'slider' id = 'dollar_slider'>
+            <div id= "scale_label">
+                <pre>1 US dollar                                   100 US dollars</pre>
+            </div>
+
+            <div id = 'angry_box'></div> <br>
+        
+            <button id = 'button' type = 'button'><b>Continue</b></button>
+            
+        </form>
+        
+    </div>
+        
+    <div id = 'pt_gen_intro'>
+        
+        <p>You have now answered some general questions about all 12 people you previously learned about. For this next part of the task, you'll be asked to answer some general questions about your thoughts and feelings toward your personal social connections.</p>
+        
+        <p>When you're ready, please press the continue button below.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+        </div>
+ 
+        
+    <div id = 'post_task_general'>
+        <form id = 'post_task_general'>
+            
+            <p><b>The questions below pertain to your general feelings towards social connection. Please answer these questions while keeping in mind your general behavior. All questions will need to be answered before you can move on to the next task.</b></p>
+            
+            How often do you spend time with a friend, on average? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'friendTime_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                  Very much</pre>
+            </div>
+            
+            How interested are you in making new friends? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'friendDesire_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                  Very much</pre>
+            </div>
+                    
+            How close would you ideally like to be with the people in your life? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Int_1_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                  Very much</pre>
+            </div>
+            
+            How platonically or romantically interested are you in a new connection? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Int_2_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Completely platonic                                  Completely romantic</pre>
+            </div>           
+            
+            Upon meeting new people, how generally interested are you in getting to know them better? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Int_3_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all interested                                    Very interested</pre>
+            </div>
+            
+            Where would you like to see yourself in relationship to your social circle? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Pow_1_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Less powerful                                     More powerful</pre>
+            </div>  
+            
+            How much influence would you like the people in your life to have on you? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Pow_2_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Very little                                    Very much</pre>
+            </div> 
+            
+            How much influence would you like to have on the people in your life? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Pow_3_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Very little                                    Very much</pre>
+            </div> 
+            
+            How much do you benefit from your relationships with others? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Val_1_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all                                    Very much</pre>
+            </div>
+            
+            How important is it to you that your relationships be personally beneficial? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Val_2_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all valuable                                   Very valuable</pre>
+            </div>
+            
+            How important is it to you that your relationships be professionally valuable? <br>
+            <input type = "range" min = '1' max = '100' value = '50' name = 'Val_3_gen' class = 'slider'>
+            <div id= "scale_label">
+                <pre>Not at all valuable                                   Very valuable</pre>
+            </div>
+            
+            <div id = 'angry_box'></div> <br>
+        
+            <button id = 'button' type = 'button'><b>Continue</b></button>
+            
+        </form>
+              
+    </div>
+        
+
+<!-- Final comments page -->
+    <div id = 'post_task_comments'>
+        
+        <p>You have completed all the main tasks of the the study! Please answer the question below regarding your experience with the tasks.</p>
+        
+        <p><b>Please use the text box below to enter in any comments, concerns, and/or to let us know of any things we may have missed in the task. Is there anything else we should know that we haven't asked about?</b></p>
+        
+        <textarea id = 'comments' rows = '8' cols = '80'></textarea><br>
+        
+        <p>When you're ready to move on to the final part of the study, please press the continue button below.</p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+  <!-- Debrief -->
+    <div id = 'debrief'>
+            
+        <h1>Debrief</h1>
+            
+        <p>Thank you for taking part in this study. The purpose of the task is to understand how the things that people learn about someone - and the order in which we learn those things - influences our desire to connect. We also wanted to see whether the things we learn about someone result in differences in the types of connections we wish to have with them. To measure social connection, we drew from current theories in the field of social psychology that define social connection along two dimensions - affiliation (intimacy, trustworthiness) and power (dominance, hierarchy). In this task, we are also testing whether there is evidence for a possible third dimension, value, which measures the extent to which one benefits from a particular social connection.</p>
+            
+        <p>During this task, we had you learn about 12 characters, each of whom had names and faces randomly matched up with a series of vignettes that fell along two dimensions: valence (whether the vignette was positive or negative) and attribution (whether the behavior described in the vignette was caused by the situation or by the character's disposition). For some characters, the dimensions of the vignettes did not change (for example, all 10 vignettes were positive and situational). In other characters, one or both of the dimensions changed after the first 5 vignettes. By keeping some characters consistent and having others shift, we can look at how desire to connect with a person changes when the things we learn about them change.</p>
+        
+        <p>In addition to asking how your desire to connect changes on a vignette by vignette basis, we also asked general questions about your feelings toward each character to get a sense for how all of the information learned informs a general conception of the character, as well as the specific types of connections you may be interested in. In order to obtain a baseline understanding for how each participant's individual desires for social connection may factor into their feelings and decisions, we also asked general questions about how much you want to connect with others and the types of connections you tend to value.</p>
+        
+        <p>Overall, our goal with this study is to deepen our understanding of how we form social connections and the different types of connections we can choose to have with others. Your participation in this task helps us gather information about how people may use social information in choosing with whom to affiliate.</p>
+            
+        <p>If you have any additional questions, comments, and/or concerns, please feel free to reach out to the Sokol-Hessner Lab at SokolHessnerLab@du.edu. </p>
+            
+        <p>Please feel free to print this for your records. When you're ready to finish the task, please press the continue button below.</p>
+            
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+        
+<!-- If a participant clicked yes on the recontact question of consent form, direct them to Qualtrics questionnaire -->
+        
+    <div id = 'qualtrics'>
+        
+        <p>During the consent, you indicated interest in being contacted to hear about and potentially be invited to participate in future studies going on in the lab. In order to add you to our recontact list, please complete the survey below:</p>
+        
+        <iframe id = 'recontact' src = 'https://udenver.qualtrics.com/jfe/form/SV_bgA7ns6gy1GnnAF'>
+        
+        </iframe><br><br>
+        
+        <p><i>When you've completed and submit the form, please press the continue button below.</i></p>
+        
+        <button id = 'button' type = 'button'><b>Continue</b></button>
+        
+    </div>
+        
+
+<!-- Final thank you page -->
+
+    <div id = 'Thanks'>
+        
+        <h1>Thank you!</h1>
+        <p>You have completed the study. Thank you for your time!</p>
+        
+        <p>You may now close this window.</p>
+      
+    </div>
+        
+    </div>
+
+
+</body>
+</html>
