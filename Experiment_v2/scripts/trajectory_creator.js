@@ -18,6 +18,12 @@ function trajectory_creator() {
     
 // Randomly sample to put together trajectories
     
+// Trajectory codes:
+    
+// Valence -> Positive (1), Negative (0)
+    
+// Attribution -> Dispositional (1), Situational (0)
+    
     // Separate vignettes into types
     neg_disp = _.where(vignettes, {vig_type: '1'});
     pos_disp = _.where(vignettes, {vig_type: '2'});
@@ -30,8 +36,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'CTRL';
         o.shift_type = 'NONE';
-        o.traj_start = 'neg-disp';
-        o.traj_end = 'neg-disp';
+        o.ts_val = 0;
+        o.ts_att = 1;
+        o.te_val = 0;
+        o.te_att = 1;
         return o;
     });
     neg_disp_remaining = _.difference(neg_disp, neg_disp_ctrl);
@@ -41,8 +49,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'CTRL';
         o.shift_type = 'NONE';
-        o.traj_start = 'pos-disp';
-        o.traj_end = 'pos-disp';
+        o.ts_val = 1;
+        o.ts_att = 1;
+        o.te_val = 1;
+        o.te_att = 1;
         return o;
     });
     pos_disp_remaining = _.difference(pos_disp, pos_disp_ctrl);
@@ -52,8 +62,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'CTRL';
         o.shift_type = 'NONE';
-        o.traj_start = 'neg-sit';
-        o.traj_end = 'neg-sit';
+        o.ts_val = 0;
+        o.ts_att = 0;
+        o.te_val = 0;
+        o.te_att = 0;
         return o;
     });
     neg_sit_remaining = _.difference(neg_sit, neg_sit_ctrl);
@@ -63,8 +75,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'CTRL';
         o.shift_type = 'NONE';
-        o.traj_start = 'pos-sit';
-        o.traj_end = 'pos-sit';
+        o.ts_val = 1;
+        o.ts_att = 0;
+        o.te_val = 1;
+        o.te_att = 0;
         return o;
     });
     pos_sit_remaining = _.difference(pos_sit, pos_sit_ctrl);
@@ -85,8 +99,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'ONE';
-        o.traj_start = 'neg-disp';
-        o.traj_end = 'neg-sit';
+        o.ts_val = 0;
+        o.ts_att = 1;
+        o.te_val = 0;
+        o.te_att = 0;
         return o;
     });
     
@@ -95,8 +111,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'ONE';
-        o.traj_start = 'neg-sit';
-        o.traj_end = 'neg-disp';
+        o.ts_val = 0;
+        o.ts_att = 0;
+        o.te_val = 0;
+        o.te_att = 1;
         return o;
     });
     
@@ -105,8 +123,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'ONE';
-        o.traj_start = 'pos-disp';
-        o.traj_end = 'pos-sit';
+        o.ts_val = 1;
+        o.ts_att = 1;
+        o.te_val = 1;
+        o.te_att = 0;
         return o;
     });
     
@@ -115,8 +135,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'ONE';
-        o.traj_start = 'pos-sit';
-        o.traj_end = 'pos-disp';
+        o.ts_val = 1;
+        o.ts_att = 0;
+        o.te_val = 1;
+        o.te_att = 1;
         return o;
     });
     
@@ -128,8 +150,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'BOTH';
-        o.traj_start = 'neg-disp';
-        o.traj_end = 'pos-sit';
+        o.ts_val = 0;
+        o.ts_att = 1;
+        o.te_val = 1;
+        o.te_att = 0;
         return o;
     });
     
@@ -138,8 +162,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'BOTH';
-        o.traj_start = 'pos-sit';
-        o.traj_end = 'neg-disp';
+        o.ts_val = 1;
+        o.ts_att = 0;
+        o.te_val = 0;
+        o.te_att = 1;
         return o;
     });
     
@@ -148,8 +174,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'BOTH';
-        o.traj_start = 'pos-disp';
-        o.traj_end = 'neg-sit';
+        o.ts_val = 1;
+        o.ts_att = 1;
+        o.te_val = 0;
+        o.te_att = 0;
         return o;
     });
     
@@ -158,8 +186,10 @@ function trajectory_creator() {
         var o = Object.assign({}, el);
         o.block_type = 'SHIFT';
         o.shift_type = 'BOTH';
-        o.traj_start = 'neg-sit';
-        o.traj_end = 'pos-disp';
+        o.ts_val = 0;
+        o.ts_att = 0;
+        o.te_val = 1;
+        o.te_att = 1;
         return o;
     });
     

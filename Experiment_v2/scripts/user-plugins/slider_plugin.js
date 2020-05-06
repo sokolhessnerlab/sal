@@ -13,17 +13,77 @@ jsPsych.plugins["slider_plugin"] = (function() {
         type: jsPsych.plugins.parameterType.STRING, // BOOL, STRING, INT, FLOAT, FUNCTION, KEYCODE, SELECT, HTML_STRING, IMAGE, AUDIO, VIDEO, OBJECT, COMPLEX
         default: undefined
       },
-    question: {
+      question: {
         type: jsPsych.plugins.parameterType.STRING,
         default: undefined
-    },
-    trial_num: {
-        type: jsPsych.plugins.parameterType.INT,
+      },
+      character: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
         default: undefined
+      },
+      img: {
+        type: jsPsych.plugins.parameterType.IMAGE, // BOOL, STRING, INT, FLOAT, FUNCTION, KEYCODE, SELECT, HTML_STRING, IMAGE, AUDIO, VIDEO, OBJECT, COMPLEX
+        default: undefined
+      },
+      vignette_ID: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined       
+      },
+      val: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined       
+      },
+      att: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
+      sent1: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
+      sent2: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
+      senttype1: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
+      senttype2: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
+      block_type: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      shift_type: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      ts_val: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      ts_att: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      te_val: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      te_att: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      trial_num: {
+          type: jsPsych.plugins.parameterType.INT,
+          default: undefined
     },
-        block: {
-            type: jsPsych.plugins.parameterType.INT,
-            default: undefined
+      block: {
+          type: jsPsych.plugins.parameterType.INT,
+          default: undefined
         }
     }
   }
@@ -69,6 +129,21 @@ jsPsych.plugins["slider_plugin"] = (function() {
         block: trial.block,
         rating: slider.value,
         question: trial.question,
+        character: trial.character,
+        image: trial.img,
+        vignette_ID: trial.vignette_ID,
+        val: trial.val,
+        att: trial.att,
+        sent1: trial.sent1,
+        sent2: trial.sent2,
+        senttype1: trial.senttype1,
+        senttype2: trial.senttype2,
+        block_type: trial.block_type,
+        shift_type: trial.shift_type,
+        ts_val: trial.ts_val,
+        ts_att: trial.ts_att,
+        te_val: trial.te_val,
+        te_att: trial.te_att,
         rt: rt,
         start_time: start_time,
         end_time: end_time

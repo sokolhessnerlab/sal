@@ -10,8 +10,24 @@ jsPsych.plugins["trial_plugin"] = (function() {
   plugin.info = {
     name: "trial_plugin",
     parameters: {
+      character: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
       img: {
         type: jsPsych.plugins.parameterType.IMAGE, // BOOL, STRING, INT, FLOAT, FUNCTION, KEYCODE, SELECT, HTML_STRING, IMAGE, AUDIO, VIDEO, OBJECT, COMPLEX
+        default: undefined
+      },
+      vignette_ID: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined       
+      },
+      val: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined       
+      },
+      att: {
+        type: jsPsych.plugins.parameterType.HTML_STRING,
         default: undefined
       },
       sent1: {
@@ -22,6 +38,14 @@ jsPsych.plugins["trial_plugin"] = (function() {
         type: jsPsych.plugins.parameterType.HTML_STRING,
         default: undefined
       },
+      senttype1: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
+      senttype2: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+        default: undefined
+      },
       block_type: {
         type: jsPsych.plugins.parameterType.HTML_STRING,
           default: undefined
@@ -30,11 +54,19 @@ jsPsych.plugins["trial_plugin"] = (function() {
           type: jsPsych.plugins.parameterType.HTML_STRING,
           default: undefined
       },
-      traj_start: {
+      ts_val: {
           type: jsPsych.plugins.parameterType.HTML_STRING,
           default: undefined
       },
-      traj_end: {
+      ts_att: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      te_val: {
+          type: jsPsych.plugins.parameterType.HTML_STRING,
+          default: undefined
+      },
+      te_att: {
           type: jsPsych.plugins.parameterType.HTML_STRING,
           default: undefined
       },
@@ -99,13 +131,21 @@ jsPsych.plugins["trial_plugin"] = (function() {
           var trial_data = {
               trial_num: trial.trial_num,
               block: trial.block,
+              character: trial.character,
               image: trial.img,
+              vignette_ID: trial.vignette_ID,
+              val: trial.val,
+              att: trial.att,
               sent1: trial.sent1,
               sent2: trial.sent2,
+              senttype1: trial.senttype1,
+              senttype2: trial.senttype2,
               block_type: trial.block_type,
               shift_type: trial.shift_type,
-              traj_start: trial.traj_start,
-              traj_end: trial.traj_end,
+              ts_val: trial.ts_val,
+              ts_att: trial.ts_att,
+              te_val: trial.te_val,
+              te_att: trial.te_att,
               text_time: trial.text_delay,
               fix_time: trial.fix_delay
         };

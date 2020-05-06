@@ -40,7 +40,7 @@ jsPsych.plugins["person_intro"] = (function() {
     var trial_data = {
         block: trial.block,
         character: trial.character,
-        img: trial.img
+        image: trial.img
     };
 
     // End trial upon button press.

@@ -1,7 +1,27 @@
 $(document).ready(function() {
     $('#templates').hide();
     
-    //TO DO: Maybe fiddle with image preloading? Also definitely cut down on the length of the task!!
+//     Complete List of Changes Made from Pilot v1 to Pilot v2:
+//    
+//     1. Save subjectID X
+//    
+//     2. Make "img" and "image" consistent (changed "img" in person_intro_plugin to save as "image") X
+//    
+//     3. Save character, image, and trajectory info all together. X
+//    
+//     4. Change trial_plugin to save character name and sentence order (saved as senttype1 and senttype2). X
+//    
+//     5. Pump all information into slider_plugin X
+//    
+//     6. Split traj_start into traj_start_val and traj_start_att. Do the same for traj_end. (Split into ts_val, ts_att, te_val, te_att. ts = "trajectory start", te = "trajectory end.") X
+//    
+//     7. Add current trial valence/attribution. (Saved in "val" and "att.") X
+//    
+//     8. Add vignette_ID! X
+//    
+//     9. Consider editing the sentence saved to remove <p></p> stuff? Uncertain whether it's worth doing if we have vignette_ID. (Decided it's not worth it.) --
+//    
+//     10. Edit practice trials block/trial_num to -1 instead of 0 (so they don't get mixed up with main trials) X
     
     // Main timeline
     exp_timeline = [];
@@ -101,40 +121,78 @@ $(document).ready(function() {
         timeline: [
             {
                 type: 'trial_plugin',
+                character: exp.pract_names[0],
                 img: exp.prac_img,
+                vignette_ID: '-1',
+                val: 'PRAC',
+                att: 'PRAC',
                 sent1: jsPsych.timelineVariable('sent1'),
                 sent2: jsPsych.timelineVariable('sent2'),
+                senttype1: 'PRAC',
+                senttype2: 'PRAC',
                 block_type: 'PRAC',
                 shift_type: 'PRAC',
-                traj_start: 'PRAC',
-                traj_end: 'PRAC',
+                ts_val: -1,
+                ts_att: -1,
+                te_val: -1,
+                te_att: -1,
                 text_delay: 4000,
                 fix_delay: 1000,
-                trial_num: 0,
-                block: 0
+                trial_num: -1,
+                block: -1
             },
             {
                 type: 'slider_plugin',
                 text: '#Liking_Question',
                 question: 'Like',
+                character: exp.pract_names[0],
+                img: exp.prac_img,
+                vignette_ID: '-1',
+                val: 'PRAC',
+                att: 'PRAC',
+                sent1: jsPsych.timelineVariable('sent1'),
+                sent2: jsPsych.timelineVariable('sent2'),
+                senttype1: 'PRAC',
+                senttype2: 'PRAC',
+                block_type: 'PRAC',
+                shift_type: 'PRAC',
+                ts_val: -1,
+                ts_att: -1,
+                te_val: -1,
+                te_att: -1,
                 trial_num: jsPsych.timelineVariable('trial_num'),
-                block: 0
+                block: -1
             },
             {
                 type: 'slider_plugin',
                 text: '#Connect_Question',
                 question: 'Connect',
+                character: exp.pract_names[0],
+                img: exp.prac_img,
+                vignette_ID: '-1',
+                val: 'PRAC',
+                att: 'PRAC',
+                sent1: jsPsych.timelineVariable('sent1'),
+                sent2: jsPsych.timelineVariable('sent2'),
+                senttype1: 'PRAC',
+                senttype2: 'PRAC',
+                block_type: 'PRAC',
+                shift_type: 'PRAC',
+                ts_val: -1,
+                ts_att: -1,
+                te_val: -1,
+                te_att: -1,
                 trial_num: jsPsych.timelineVariable('trial_num'),
-                block: 0
+                block: -1
             }
         ],
         timeline_variables: [
             {sent1: '<p>' + exp.pract_sent[0].format(exp.pract_names[0]) + '</p>', 
              sent2: '<p>' + exp.pract_sent[1] + '</p>',
-            trial_num: 0},
+            trial_num: -1},
             {sent1: '<p>' + exp.pract_sent[2].format(exp.pract_names[0]) + '</p>',
              sent2: '<p>' + exp.pract_sent[3] + '</p>',
-             trial_num: 0}
+             trial_num: -1}
         ],
         randomize_order: true // Is it worth it? Screws with trial_num.
     }
@@ -164,13 +222,21 @@ $(document).ready(function() {
                 timeline: [
                     {
                         type: 'trial_plugin',
+                        character: exp.names[ii][0],
                         img: exp.image_names[ii],
+                        vignette_ID: exp.vignettes[ii][i]['vignette_ID'],
+                        val: exp.vignettes[ii][i]['val_type'],
+                        att: exp.vignettes[ii][i]['att_type'],
                         sent1: '<p>' + exp.vignettes[ii][i][exp.sent_order[(ii * 10) + i ][0]].format(exp.names[ii][0]) + '</p>',
                         sent2: '<p>' + exp.vignettes[ii][i][exp.sent_order[(ii * 10) + i ][1]].format(exp.names[ii][0]) + '</p>',
+                        senttype1: exp.sent_order[(ii * 10) + i][0],
+                        senttype2: exp.sent_order[(ii * 10) + i][1],
                         block_type: exp.vignettes[ii][i]['block_type'],
                         shift_type: exp.vignettes[ii][i]['shift_type'],
-                        traj_start: exp.vignettes[ii][i]['traj_start'],
-                        traj_end: exp.vignettes[ii][i]['traj_end'],
+                        ts_val: exp.vignettes[ii][i]['ts_val'],
+                        ts_att: exp.vignettes[ii][i]['ts_att'],
+                        te_val: exp.vignettes[ii][i]['te_val'],
+                        te_att: exp.vignettes[ii][i]['te_att'],
                         text_delay: 4000,
                         fix_delay: 1000,
                         trial_num: i,
@@ -180,6 +246,21 @@ $(document).ready(function() {
                         type: 'slider_plugin',
                         text: '#Liking_Question',
                         question: 'Like',
+                        character: exp.names[ii][0],
+                        img: exp.image_names[ii],
+                        vignette_ID: exp.vignettes[ii][i]['vignette_ID'],
+                        val: exp.vignettes[ii][i]['val_type'],
+                        att: exp.vignettes[ii][i]['att_type'],
+                        sent1: '<p>' + exp.vignettes[ii][i][exp.sent_order[(ii * 10) + i ][0]].format(exp.names[ii][0]) + '</p>',
+                        sent2: '<p>' + exp.vignettes[ii][i][exp.sent_order[(ii * 10) + i ][1]].format(exp.names[ii][0]) + '</p>',
+                        senttype1: exp.sent_order[(ii * 10) + i][0],
+                        senttype2: exp.sent_order[(ii * 10) + i][1],
+                        block_type: exp.vignettes[ii][i]['block_type'],
+                        shift_type: exp.vignettes[ii][i]['shift_type'],
+                        ts_val: exp.vignettes[ii][i]['ts_val'],
+                        ts_att: exp.vignettes[ii][i]['ts_att'],
+                        te_val: exp.vignettes[ii][i]['te_val'],
+                        te_att: exp.vignettes[ii][i]['te_att'],
                         trial_num: i,
                         block: ii
                     },
@@ -187,6 +268,21 @@ $(document).ready(function() {
                         type: 'slider_plugin',
                         text: '#Connect_Question',
                         question: 'Connect',
+                        character: exp.names[ii][0],
+                        img: exp.image_names[ii],
+                        vignette_ID: exp.vignettes[ii][i]['vignette_ID'],
+                        val: exp.vignettes[ii][i]['val_type'],
+                        att: exp.vignettes[ii][i]['att_type'],
+                        sent1: '<p>' + exp.vignettes[ii][i][exp.sent_order[(ii * 10) + i ][0]].format(exp.names[ii][0]) + '</p>',
+                        sent2: '<p>' + exp.vignettes[ii][i][exp.sent_order[(ii * 10) + i ][1]].format(exp.names[ii][0]) + '</p>',
+                        senttype1: exp.sent_order[(ii * 10) + i][0],
+                        senttype2: exp.sent_order[(ii * 10) + i][1],
+                        block_type: exp.vignettes[ii][i]['block_type'],
+                        shift_type: exp.vignettes[ii][i]['shift_type'],
+                        ts_val: exp.vignettes[ii][i]['ts_val'],
+                        ts_att: exp.vignettes[ii][i]['ts_att'],
+                        te_val: exp.vignettes[ii][i]['te_val'],
+                        te_att: exp.vignettes[ii][i]['te_att'],
                         trial_num: i,
                         block: ii
                     }
@@ -294,6 +390,12 @@ $(document).ready(function() {
                  text_type: 'Finish'};
     
     exp_timeline.push(thanks);
+    
+// Add properties 
+    jsPsych.data.addProperties({
+        subject: exp.subjID,
+        timeStamp: exp.timeStamp
+    });
     
 // Function to save data to server
     function saveData(name, data) {
